@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Finanças</title>
+
+     <!-- fontes: uma sans-serif pra texto, uma monospace pra números -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+    <!-- os estilos  são gerados em typescript (estilos.ts) e injetados aqui dentro via javascript. por isso a tag começa vazia -->
+     <style id="estilos-dinamicos"></style>
+
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="titulo-principal">Dashboard de Finanças</h1>
+        <p class="subtitulo">Controle suas entradas de saídas</p>
+
+        <!-- cards de resumo -->
+         <div class="resumo-grid">
+            <div class="card-resumo">
+                <div class="card-resumo-label">Entradas</div>
+                <div class="card-resumo-valor valor-entrada" id="valor-entrada">R$ 0,00</div>
+            </div>
+
+            <div class="card-resumo">
+                <div class="card-resumo-label">Saídas</div>
+                <div class="card-resumo-valor valor-saida" id="valor-saidas">R$ 00,00</div>
+            </div>
+            <div class="card-resumo">
+                <div class="card-resumo-label">Saldo</div>
+                <div class="card-resumo-valor valor-saldo" id="valor-saldo">R$ 00,00</div>
+            </div>
+         </div>
+
+         <!-- Formulario de nova transação -->
+         <div class="painel-formulario">
+            <h2 class="painel-titulo">Nova transação</h2>
+            <form id="formulario-transacao">
+                <div class="grupo-tipo">
+                    <button type="button" class="botao-tipo" id="botao-tipo-entrada">↑ Entrada</button>
+                    <button type="button" id="botao-tipo-saida" class="botao-tipo">↓ Saída</button>
+                </div>
+
+                <div class="form-grid">
+                    <div>
+                        <label for="campo-descricao" class="campo-label">Descrição</label>
+                        <input type="text" id="campo-descricao" placeholder="Ex: Supermercado" required>
+                    </div>
+
+                    <div>
+                        <label class="campo-label" for="campo-valor">Valor (R$)</label>
+                        <input type="number" id="campo-valor" placeholder="0,00" step="0.01" min="0.01" required>
+                    </div>
+
+                    <div>
+                        <label for="campo-categoria" class="campo-label">Categoria</label>
+                        <select id="campo-categoria">
+                            <option value="alimentacao">Alimentação</option>
+                            <option value="transporte">Transporte</option>
+                            <option value="lazer">Lazer</option>
+                            <option value="moradia">Moradia</option>
+                            <option value="saude">Saúde</option>
+                            <option value="salario">Salário</option>
+                            <option value="investimento">Investimento</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="campo-data" class="campo-label">Data</label>
+                        <input type="date" id="campo-data" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="botao-adicionar">Adicionar Transação</button>
+            </form>
+         </div>
+
+         <!-- lista de transaçoes -->
+          <div class="lista-cabecalho">
+            <h2 class="painel-titulo">Transações</h2>
+            <div class="filtros">
+                <button class="botao-filtro ativo" data-filtro="todos">Todos</button>
+                <button class="botao-filtro" data-filtro="entrada">Entradas</button>
+                <button class="botao-filtro" data-filtro="saida">Saídas</button>
+            </div>
+          </div>
+
+          <div id="lista-transacoes"></div>
+    </div>
+
+    <!-- 
+        type="module" permite usar import/export entre arquivos JS. O navegador carrega main.js, que importa dos outros arquivos. 
+    -->
+    <script type="module" src="./dist/aplicar-estilos.js"></script>
+    <script type="module" src="./dist/main.js"></script>
+</body>
+</html>

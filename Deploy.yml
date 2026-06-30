@@ -1,0 +1,49 @@
+name: Deploy para GitHub Pages
+
+# roda toda vez que houver um push na branch main
+on:
+  push:
+    branches: ["main"]
+
+# permissões necessárias para publicar no GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-e-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. baixa o código do repositório para a máquina virtual do GitHub
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      # 2. instala o Node.js (necessário para rodar o TypeScript)
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # 3. instala o TypeScript como dependência
+      - name: Instalar dependências
+        run: npm install --no-save typescript
+
+      # 4. compila o TypeScript (gera a pasta dist/)
+      - name: Compilar TypeScript
+        run: npx tsc -p tsconfig.json
+
+      # 5. Prepara o GitHub Pages
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+
+      # 6. empacota TUDO que precisa ser publicado (HTML + dist/ já compilado)
+      - name: Empacotar arquivos
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      # 7. publica de fato no GitHub Pages
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
