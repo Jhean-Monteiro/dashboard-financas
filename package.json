@@ -1,0 +1,19 @@
+{
+  "name": "dashboard-financas",
+  "version": "1.0.0",
+  "description": "Projeto de estudo: TypeScript puro + HTML + CSS-in-JS manual (sem React, sem bibliotecas externas de estilo).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jhean-Monteiro/dashboard-finan-as.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jhean-Monteiro/dashboard-finan-as/issues"
+  },
+  "homepage": "https://github.com/Jhean-Monteiro/dashboard-finan-as#readme"
+}

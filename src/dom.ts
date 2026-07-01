@@ -1,9 +1,9 @@
-// MANIPULAÇÃO DA PÁGINA (HTML)
+// MANIPULAÇÃO DA PÁGINA (HTML) 
 // esse arquivo é responsável por desenhar os dados na tela.
 // ele pega os dados já prontos e transforma em elementos HTML.
 
 import type { Transacao, FiltroTipo, Categoria, TipoTransacao } from "./types";
-import { CORES } from "./estilos";
+import { CORES } from "./estilos.js";
 
 
 // mapa de categorias para exibir nome bonito
@@ -37,7 +37,7 @@ function formatarData(dataIso:string):string {
 
 // renderizarResumo atualiza os 3 cards do topo (entradas, saidas, saldo)
 export function renderizarResumo(totalEntradas: number, totalSaidas:number, saldo:number): void {
-    const elEntradas = document.querySelector<HTMLElement>("#valor-entradas")
+    const elEntradas = document.querySelector<HTMLElement>("#valor-entrada")
     const elSaidas = document.querySelector<HTMLElement>("#valor-saidas")
     const elSaldo = document.querySelector<HTMLElement>("#valor-saldo")
 
@@ -96,4 +96,35 @@ export function renderizarLista(transacoes: Transacao[], aoRemover: (id:string) 
         const elemento = criarElementoTransacao(transacao, aoRemover)
         lista.appendChild(elemento)
     }
+}
+
+
+// atualizarBotoesFiltro destaca visualmente qual filtro esta ativo
+export function atualizarBotoesFiltro(filtroAtivo: FiltroTipo): void {
+    const botoes = document.querySelectorAll<HTMLElement>(".botao-filtro")
+
+    botoes.forEach((botao) => {
+        const filtroDoBotao = botao.dataset.filtro as FiltroTipo
+        botao.classList.toggle("ativo", filtroDoBotao === filtroAtivo)
+    })
+}
+
+
+//  atualizarBotoesTipo destaca visualmente se entrada ou saida está selecionado no formulario
+export function atualizarBotoesTipo(tipoAtivo: TipoTransacao): void {
+    const botaoEntrada = document.querySelector<HTMLButtonElement>("#botao-tipo-entrada")
+    const botaoSaida = document.querySelector<HTMLButtonElement>("#botao-tipo-saida")
+
+    botaoEntrada?.classList.toggle("ativo-entrada", tipoAtivo === "entrada")
+    botaoSaida?.classList.toggle("ativo-saida", tipoAtivo === "saida")
+}
+
+
+// limparFormulario reseta os campos depois de adicionar uma transação
+export function limparFormulario(): void {
+    const descricao = document.querySelector<HTMLInputElement>("#campo-descricao")
+    const valor = document.querySelector<HTMLInputElement>("#campo-valor")
+
+    if (descricao) descricao.value = ""
+    if (valor) valor.value = ""
 }
