@@ -1,4 +1,4 @@
-// MANIPULAÇÃO DA PÁGINA (HTML) 
+// MANIPULAÇÃO DA PÁGINA (HTML)
 // esse arquivo é responsável por desenhar os dados na tela.
 // ele pega os dados já prontos e transforma em elementos HTML.
 
